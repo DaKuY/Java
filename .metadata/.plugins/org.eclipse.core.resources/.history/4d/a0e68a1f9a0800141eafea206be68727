@@ -1,0 +1,15 @@
+package com.andrewcamero.example;
+
+public class Wolf extends Animal{
+
+	@Override
+	public void makeSound() {
+		System.out.println("Howl!");		
+	}
+
+	@Override
+	public void getName() {
+		System.out.println("I'm a Wolf!");
+	}
+
+}

@@ -1,0 +1,7 @@
+package com.andrewcamero.interfaces;
+
+public class AnimalServiceImpl implements AnimalService{
+	
+	
+
+}

@@ -1,0 +1,5 @@
+package com.andrewcamero.interfaces;
+
+public interface AnimalService {
+
+}

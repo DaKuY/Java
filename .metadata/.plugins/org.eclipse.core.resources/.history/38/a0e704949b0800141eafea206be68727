@@ -1,0 +1,11 @@
+package com.andrewcamero.interfaces;
+
+import java.util.List;
+
+import com.andrewcamero.abstracts.Animal;
+
+public interface AnimalService {
+	
+	public List<Animal> getAllAnimals();
+
+}

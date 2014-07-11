@@ -1,0 +1,13 @@
+package com.andrewcamero.interfaces;
+
+public class AppJava {
+
+	public static void main(String[] args) {
+		
+		AnimalService animalService = new AnimalServiceImpl();
+		
+		List<Animal> animalList = animalService.getAllAnimals();
+
+	}
+
+}
