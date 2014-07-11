@@ -1,4 +1,4 @@
-Abstract and Interface Example
+Using Maven with Java and Eclipse
 ===================
 
 1. Use Maven to generate seleton package >> mvn archetype:generate -DgroupId=<package name> -DartifactId=<Project Name> -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false 
