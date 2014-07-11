@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.andrewcamero.example.Animal"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.andrewcamero.abstracts.Wolf"/>
+<fullyQualifiedTypeName name="com.andrewcamero.abstracts.Tiger"/>
+<fullyQualifiedTypeName name="com.andrewcamero.interfaces.AnimalService"/>
+<fullyQualifiedTypeName name="com.andrewcamero.interfaces.AnimalServiceImpl"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="com.andrewcamero.abstracts.Animal"/>
+</qualifiedTypeNameHistroy>

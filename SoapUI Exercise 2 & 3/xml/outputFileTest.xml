@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment>
+	<employee>
+		<name>Doug</name>
+		<nickname>old guy</nickname>
+	</employee>
+	<employee>
+		<name>Steph</name>
+		<nickname>new gal</nickname>
+	</employee>
+<employee><name>Andrew</name><nickname>That Filipino Guy.</nickname></employee></xml-fragment>
