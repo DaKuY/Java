@@ -1,0 +1,30 @@
+package com.dfwcomputech.spring;
+
+import java.util.Map;
+
+public class HelloWorld {
+	private String name;
+	private Map sqlMap;
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public void sayHello(){
+		System.out.println("Hello "+sqlMap+"!!!!");
+	}
+
+	public Map getSqlMap() {
+		return sqlMap;
+	}
+
+	public void setSqlMap(Map sqlMap) {
+		this.sqlMap = sqlMap;
+	}
+	
+	
+}

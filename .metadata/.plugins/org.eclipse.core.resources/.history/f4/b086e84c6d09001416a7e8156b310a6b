@@ -1,0 +1,29 @@
+package com.dfwcomputech.spring.dao.impl.extractor;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.ResultSetExtractor;
+
+public class TestQueryExtractor implements ResultSetExtractor<List<String>> {
+
+	@Override
+	public List<String> extractData(ResultSet rs) throws SQLException,
+			DataAccessException {
+		List<String> queryList = new ArrayList<>();
+		if (rs != null) {
+			while (rs.next()) {
+				String plan = rs.getString("CORP_ENT_CD");
+				String specialty = rs.getString("SPECIALTY");
+				String spclycd = rs.getString("SPCLTY_CD");
+
+				queryList.add(plan + "," + specialty + "," + spclycd);
+			}
+		}
+		return queryList;
+	}
+
+}

@@ -1,0 +1,11 @@
+#Login Credentials
+username=username
+password=password
+url=jdbc:db2://
+
+#  Database connection properties
+driver.class=com.ibm.db2.jcc.DB2Driver
+schema=Dev
+
+# SQL
+sql = select COLUMN1, COLUMN2, COLUMN3 from $(schema).TABLENAME

@@ -1,0 +1,83 @@
+package com.andrewcamero.example
+
+import java.sql.Connection;
+import java.io.File;
+import java.net.URL;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.logging.log4j.LogManager;
+import java.util.Properties;
+import org.apache.logging.log4j.Logger;
+
+public class DailyReset
+{
+    private static Logger logger;
+    private static Properties daily_reset;
+    private static String prefSchema;
+    private static String prefLoadID;
+    private static String uatSchema;
+    private static String uatLoadID;
+    private static String username;
+    private static String password;
+    private static String url;
+  
+    static {
+        DailyReset.logger = LogManager.getLogger(DailyReset.class);
+        loadProperties();
+    }
+   
+    private static void loadProperties() {
+        final String propertiesFile = "daily_reset.properties";
+        try {
+            daily_reset = new Properties();
+            final URL uniformResourceLocator = ClassLoader.getSystemResource(propertiesFile);
+            daily_reset.load(uniformResourceLocator.openStream());
+        }
+        catch (Exception e) {
+            DailyReset.logger.error(ExceptionUtils.getStackTrace(e));
+            System.exit(1);
+        }        
+    }
+    
+    private void init() {
+        username = daily_reset.getProperty("username");
+        password = daily_reset.getProperty("password");
+        url = daily_reset.getProperty("url");
+        prefSchema = daily_reset.getProperty("pref.schema");
+        uatSchema = daily_reset.getProperty("uat.schema");
+        prefLoadID = daily_reset.getProperty("pref.load.id");
+        uatLoadID = daily_reset.getProperty("uat.load.id");
+    }
+   
+    public static void runReset() {
+        final Connection wlmDB = ConnectionManager.getDBConnection(DailyReset.url, DailyReset.username, DailyReset.password);
+        final DailyResetDAOImpl impl = new DailyResetDAOImpl();
+        boolean active = false;
+        
+        active = impl.checkLoadID(wlmDB, DailyReset.prefSchema, DailyReset.prefLoadID);
+        
+        if (!active) {
+            impl.markActive(wlmDB, DailyReset.prefSchema, DailyReset.prefLoadID);
+        }
+        
+        impl.runReset(wlmDB, DailyReset.prefSchema, DailyReset.prefLoadID);
+        active = impl.checkLoadID(wlmDB, DailyReset.uatSchema, DailyReset.uatLoadID);
+        
+        if (!active) {
+            impl.markActive(wlmDB, DailyReset.uatSchema, DailyReset.uatLoadID);
+        }
+        
+        impl.runReset(wlmDB, DailyReset.uatSchema, DailyReset.uatLoadID);
+        ConnectionManager.closeConnection(wlmDB);
+    }
+   
+    public static void main(final String[] aa) {
+        final long startTime = System.nanoTime();
+        
+        final DailyReset htcFileParser = new DailyReset();
+        htcFileParser.init();
+        runReset();
+        final long endTime = System.nanoTime();
+        
+        DailyReset.logger.debug("Took " + (endTime - startTime) / 1000000000L + "s");
+    }
+}

@@ -1,0 +1,54 @@
+package com.andrewcamero.jdbc;
+
+
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import java.sql.Connection;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class DBConnectionDAOImpl
+{
+    private static Logger logger;
+
+    static {
+        DBConnectionDAOImpl.logger = LogManager.getLogger(DBConnectionDAOImpl.class);
+    }
+    
+    public void executeSQL(Connection connection, String schema) {
+        PreparedStatement preparedStatement = null;
+        try {
+        	preparedStatement = connection.prepareStatement("select COLUMN1, COLUMN2 from " + schema + ".TABLENAME");
+            ResultSet results = preparedStatement.executeQuery();
+            
+            while(results.next()){
+				logger.debug(results.getString(0));
+				logger.debug(results.getString(1));
+			}
+            
+            preparedStatement.close();
+        }
+        catch (Exception e) {
+            DBConnectionDAOImpl.logger.error(ExceptionUtils.getStackTrace(e));
+        }
+    }
+    
+    public void executeSQLProperties(Connection connection, String sql) {
+        PreparedStatement preparedStatement = null;
+        try {
+        	preparedStatement = connection.prepareStatement(sql);
+            ResultSet results = preparedStatement.executeQuery();
+            
+            while(results.next()){
+				logger.debug(results.getString(0));
+				logger.debug(results.getString(1));
+			}
+            
+            preparedStatement.close();
+        }
+        catch (Exception e) {
+            DBConnectionDAOImpl.logger.error(ExceptionUtils.getStackTrace(e));
+        }
+    }
+}

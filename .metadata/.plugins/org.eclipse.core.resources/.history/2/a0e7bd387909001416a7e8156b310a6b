@@ -1,0 +1,19 @@
+package com.andrewcamero.spring;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String... vars )
+    {
+       
+    }
+    
+	private static void helloWorldExample(){
+		
+		HelloWorld helloWorld=(HelloWorld)context.getBean("helloWorld");
+		helloWorld.sayHello();	
+	}
+}

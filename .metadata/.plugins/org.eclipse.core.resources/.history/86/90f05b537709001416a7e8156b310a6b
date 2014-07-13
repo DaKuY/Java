@@ -1,0 +1,11 @@
+#Login Credentials
+username=
+password=
+url=
+
+#  Database connection properties
+driver.class=
+schema=
+
+# SQL
+sql = select COLUMN1, COLUMN2 from $(name).TABLENAME

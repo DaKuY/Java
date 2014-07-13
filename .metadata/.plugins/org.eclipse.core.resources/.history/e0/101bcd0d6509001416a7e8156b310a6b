@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{MM/dd/yyyy HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+    </Console>
+     <File name="Toc_Log" fileName="toc.log" bufferedIO="false" append="true">
+     	<PatternLayout pattern="%d{MM/dd/yyyy HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+  	</File>
+  	
+  	 <File name="RSA_Log" fileName="rsa_ngen.log" bufferedIO="false" append="true">
+     	<PatternLayout pattern="%d{MM/dd/yyyy HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+  	</File>
+  	
+  	 <File name="HRA_Log" fileName="hra.log" bufferedIO="false" append="true">
+     	<PatternLayout pattern="%d{MM/dd/yyyy HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+  	</File>
+  	
+  	<File name="HTC_Log" fileName="htc.log" bufferedIO="false" append="true">
+     	<PatternLayout pattern="%d{MM/dd/yyyy HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+    </File>
+     
+    <File name="RSAReProcess_Log" fileName="RSAReProcess.Log" bufferedIO="false" append="true">
+	   	<PatternLayout pattern="%d{MM/dd/yyyy HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+  	</File>
+  </Appenders>
+
+  
+  <Loggers>
+    <Logger name="rsaextractor" level="debug" additivity="false">
+      <AppenderRef ref="RSA_Log" level="debug"/>
+      <AppenderRef ref="Console" level="debug"/>
+    </Logger>
+    
+    <Logger name="hraquestionnaires" level="debug" additivity="false">
+      <AppenderRef ref="HRA_Log" level="debug"/>
+      <AppenderRef ref="Console" level="debug"/>
+    </Logger>
+    
+     <Logger name="htc" level="debug" additivity="false">
+      <AppenderRef ref="HTC_Log" level="debug"/>
+      <AppenderRef ref="Console" level="debug"/>
+    </Logger>
+    
+    <Logger name="toc" level="debug" additivity="false">
+          <AppenderRef ref="Toc_Log" level="debug"/>
+          <AppenderRef ref="Console" level="debug"/>
+    </Logger>
+     
+    <Logger name="rsareprocess" level="debug" additivity="false">
+    	<AppenderRef ref="RSAReProcess_Log" level="debug"/>
+      	<AppenderRef ref="Console" level="debug"/>
+    </Logger>
+    
+    <Root level="debug">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="Toc_Log"/>
+      <AppenderRef ref="RSA_Log"/>
+      <AppenderRef ref="HTC_Log"/>
+      <AppenderRef ref="RSAReProcess_Log"/>
+    </Root>
+  </Loggers>
+</Configuration>

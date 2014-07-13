@@ -1,0 +1,15 @@
+1405117950136	Rename type 'App'
+1405130756514	Rename type 'DailyReset'
+1405130778713	Rename type 'DailyResetDAOImpl'
+1405131560881	Move file
+1405131611130	Rename package 'com.andrewcamero.example'
+1405131623573	Rename package 'com.andrewcamero.example'
+1405132299322	Rename resource 'daily_reset.properties'
+1405137407120	Rename package 'com.andrewcamero.jdbc.connection'
+1405137422965	Rename package 'com.andrewcamero.jdbc.connectionManager'
+1405137428465	Move compilation unit
+1405137454583	Move compilation unit
+1405137471082	Rename package 'com.andrewcamero.dao'
+1405138391043	Rename package 'com.andrewcamero.jdbc.dao.imp'
+1405138407088	Move compilation unit
+1405138411522	Move compilation unit

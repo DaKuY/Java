@@ -1,0 +1,15 @@
+package com.andrewcamero.spring.dao.impl;
+
+import java.util.List;
+
+import com.andrewcamero.spring.dao.ProviderDao;
+
+public class ProviderDaoImpl implements ProviderDao{
+
+	@Override
+	public List<String> queryTest() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

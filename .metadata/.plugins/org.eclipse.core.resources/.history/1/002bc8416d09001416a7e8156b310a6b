@@ -1,0 +1,7 @@
+package com.dfwcomputech.spring.dao;
+
+import java.util.List;
+
+public interface ProviderDao {
+	public List<String> queryTest();
+}

@@ -1,0 +1,7 @@
+package com.andrewcamero.spring.dao.impl;
+
+import com.andrewcamero.spring.dao.ProviderDao;
+
+public class ProviderDaoImpl implements ProviderDao{
+
+}

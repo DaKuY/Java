@@ -1,0 +1,50 @@
+package com.andrewcamero.spring.dao.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+
+import com.andrewcamero.spring.dao.ProviderDao;
+import com.andrewcamero.spring.dao.impl.extractor.TestQueryExtractor;
+
+/*
+ * @Component tells Spring to look here to is if there anything it can do
+ */
+@Component
+public class ProviderDaoImpl implements ProviderDao{
+
+	/*
+	 * Spring fills jdbcTemplate with the bean associated with 'jdbcTemplate'
+	 */
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+	
+	/*
+	 * Spring fills jdbcTemplate with the bean associated with 'map'
+	 */
+	@Resource(name="map")
+	private Map<String, String> map;
+	
+	/*
+	 * This is suppose to execute the query and returns the results
+	 */
+//	@Override
+//	public List<String> queryTest() {
+//		String queryStr=(String)map.get("test_query");
+//		return jdbcTemplate.query(queryStr, new TestQueryExtractor());
+//	}
+	
+	@Override
+	public List<String> queryTest() {
+		String queryStr=(String)map.get("test_query");
+		return jdbcTemplate.query(queryStr, new TestQueryExtractor());
+	}
+
+}

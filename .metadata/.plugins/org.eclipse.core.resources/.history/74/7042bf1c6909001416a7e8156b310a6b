@@ -1,0 +1,74 @@
+package com.andrewcamero.example;
+
+import java.sql.Connection;
+import java.net.URL;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.logging.log4j.LogManager;
+import java.util.Properties;
+import org.apache.logging.log4j.Logger;
+
+public class DBConnection
+{
+    private static Logger logger;
+    private static Properties daily_reset;
+    private static String schema;
+    private static String username;
+    private static String password;
+    private static String url;
+  
+    static {
+        DBConnection.logger = LogManager.getLogger(DBConnection.class);
+        loadProperties();
+    }
+   
+    private static void loadProperties() {
+        String propertiesFile = "daily_reset.properties";
+        try {
+            daily_reset = new Properties();
+            URL uniformResourceLocator = ClassLoader.getSystemResource(propertiesFile);
+            daily_reset.load(uniformResourceLocator.openStream());
+        }
+        catch (Exception e) {
+            DBConnection.logger.error(ExceptionUtils.getStackTrace(e));
+            System.exit(1);
+        }        
+    }
+    
+    private void init() {
+        username = daily_reset.getProperty("username");
+        password = daily_reset.getProperty("password");
+        url = daily_reset.getProperty("url");
+        schema = daily_reset.getProperty("schema");
+    }
+   
+    public static void runReset() {
+        Connection wlmDB = ConnectionManager.getDBConnection(DBConnection.url, DBConnection.username, DBConnection.password);
+        DailyResetDAOImpl impl = new DailyResetDAOImpl();
+        boolean active = false;
+        
+        if (!active) {
+            impl.markActive(wlmDB, DBConnection.prefSchema, DBConnection.prefLoadID);
+        }
+        
+        impl.runReset(wlmDB, DBConnection.prefSchema, DBConnection.prefLoadID);
+        active = impl.checkLoadID(wlmDB, DBConnection.uatSchema, DBConnection.uatLoadID);
+        
+        if (!active) {
+            impl.markActive(wlmDB, DBConnection.uatSchema, DBConnection.uatLoadID);
+        }
+        
+        impl.runReset(wlmDB, DBConnection.uatSchema, DBConnection.uatLoadID);
+        ConnectionManager.closeConnection(wlmDB);
+    }
+   
+    public static void main(String[] aa) {
+        long startTime = System.nanoTime();
+        
+        DBConnection htcFileParser = new DBConnection();
+        htcFileParser.init();
+        runReset();
+        long endTime = System.nanoTime();
+        
+        DBConnection.logger.debug("Took " + (endTime - startTime) / 1000000000L + "s");
+    }
+}

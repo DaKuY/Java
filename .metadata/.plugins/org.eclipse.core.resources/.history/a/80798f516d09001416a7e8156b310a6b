@@ -1,0 +1,17 @@
+package com.dfwcomputech.spring.domaindto;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class Pfin {
+	private String pfinStr="default";
+
+	public String getPfinStr() {
+		return pfinStr;
+	}
+
+	public void setPfinStr(String pfinStr) {
+		this.pfinStr = pfinStr;
+	}
+	
+}

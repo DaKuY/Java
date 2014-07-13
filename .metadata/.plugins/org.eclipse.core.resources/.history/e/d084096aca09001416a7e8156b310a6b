@@ -1,0 +1,5 @@
+package com.andrewcamero.spring.dao.impl.extractor;
+
+public class TestQueryExtractor {
+
+}

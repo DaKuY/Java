@@ -1,0 +1,14 @@
+#Login Credentials
+username=
+password=
+url=
+
+#  Database connection properties
+driver.class=
+#-----L&P-----
+pref.schema=
+pref.load.id=
+
+#-----UAT-----
+uat.schema=
+uat.load.id=

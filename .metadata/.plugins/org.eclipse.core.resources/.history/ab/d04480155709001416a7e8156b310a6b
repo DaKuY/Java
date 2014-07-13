@@ -1,0 +1,72 @@
+package com.andrewcamero.example
+
+
+
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import java.sql.Connection;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class DailyResetDAOImpl
+{
+    private static Logger logger;
+
+    static {
+        DailyResetDAOImpl.logger = LogManager.getLogger(DailyResetDAOImpl.class);
+    }
+   
+    public boolean checkLoadID(final Connection wlmDB, final String schema, final String loadID) {
+        PreparedStatement pstmt = null;
+        boolean active = false;
+        try {
+            pstmt = wlmDB.prepareStatement("select AVAILABILITY_IND from " + schema + ".SOURCE_LOAD where LOAD_ID = " + loadID + " with UR;");
+            final ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            if (rs.getString(1).equals("Y")) {
+                DailyResetDAOImpl.logger.debug("Load id: " + loadID + " is Active.");
+                active = true;
+            }
+            pstmt.close();
+            rs.close();
+        }
+        catch (Exception e) {
+            DailyResetDAOImpl.logger.error(ExceptionUtils.getStackTrace(e));
+        }
+        return active;
+    }
+   
+    public void markActive(final Connection wlmDB, final String schema, final String loadID) {
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = wlmDB.prepareStatement("update " + schema + ".SOURCE_LOAD set AVAILABILITY_IND = 'Y' where LOAD_ID = " + loadID + ";");
+            pstmt.executeUpdate();
+            DailyResetDAOImpl.logger.debug("Load id: " + loadID + " is  NOT Active.");
+            DailyResetDAOImpl.logger.debug("Load ID: " + loadID + " marked as Active");
+            pstmt.close();
+        }
+        catch (Exception e) {
+            DailyResetDAOImpl.logger.error(ExceptionUtils.getStackTrace(e));
+        }
+    }
+   
+    public void runReset(final Connection wlmDB, final String schema, final String loadID) {
+        PreparedStatement pstmt = null;
+        PreparedStatement pstmt2 = null;
+        try {
+            pstmt = wlmDB.prepareStatement("update " + schema + ".CASE_RECORD " + "set CASE_LOAD_STATUS_CD = 'NOT_LOAD' " + ", CASE_LOAD_STATUS_DESC = 'Not Loaded' " + "where LOAD_ID = " + loadID + " " + "and CASE_LOAD_STATUS_CD in ('ERROR', 'VALID_PROG') " + "and ( CASE_LOAD_STATUS_DESC like 'Valid Alineo Program: %' " + "or CASE_LOAD_STATUS_DESC like 'Error: %' );");
+            int rowsUpdated = pstmt.executeUpdate();
+            DailyResetDAOImpl.logger.debug("Rows Updated 1: " + rowsUpdated);
+            pstmt.close();
+            System.out.println("update " + schema + ".OUTREACH_WORKFLOW ow1 " + "set ow1.CASE_ID = null " + ", ow1.PHASE_CD = concat( ( select ow2.CASE_TYPE_CD " + "from " + schema + ".OUTREACH_WORKFLOW ow2 " + "where ow2.LOAD_ID = " + loadID + " " + "and ow2.CMPS_MID = ow1.CMPS_MID ) " + ", 'NOTASGN' ) " + "where ow1.LOAD_ID = " + loadID + " " + "and ( ow1.PHASE_CD like '%MLOADED%' " + "or ow1.PHASE_CD like '%MSUCCESS%' );");
+            pstmt2 = wlmDB.prepareStatement("update " + schema + ".OUTREACH_WORKFLOW ow1 " + "set ow1.CASE_ID = null " + ", ow1.PHASE_CD = concat( ( select ow2.CASE_TYPE_CD " + "from " + schema + ".OUTREACH_WORKFLOW ow2 " + "where ow2.LOAD_ID = " + loadID + " " + "and ow2.CMPS_MID = ow1.CMPS_MID ) " + ", 'NOTASGN' ) " + "where ow1.LOAD_ID = " + loadID + " " + "and ( ow1.PHASE_CD like '%MLOADED%' " + "or ow1.PHASE_CD like '%MSUCCESS%' );");
+            int rowsUpdated2 = pstmt2.executeUpdate();
+            DailyResetDAOImpl.logger.debug("Rows Updated 2: " + rowsUpdated2);
+            pstmt2.close();
+        }
+        catch (Exception e) {
+            DailyResetDAOImpl.logger.error(ExceptionUtils.getStackTrace(e));
+        }
+    }
+}

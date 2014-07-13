@@ -1,0 +1,70 @@
+package com.andrewcamero.example;
+
+
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import java.sql.Connection;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class DailyResetDAOImpl
+{
+    private static Logger logger;
+
+    static {
+        DailyResetDAOImpl.logger = LogManager.getLogger(DailyResetDAOImpl.class);
+    }
+   
+    public boolean checkLoadID( Connection wlmDB,  String schema,  String loadID) {
+        PreparedStatement pstmt = null;
+        boolean active = false;
+        try {
+            pstmt = wlmDB.prepareStatement("select * from " + schema + ".TABLENAME where LOADID = " + loadID + " with UR;");
+             ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            if (rs.getString(1).equals("Y")) {
+                DailyResetDAOImpl.logger.debug("Load id: " + loadID + " is Active.");
+                active = true;
+            }
+            pstmt.close();
+            rs.close();
+        }
+        catch (Exception e) {
+            DailyResetDAOImpl.logger.error(ExceptionUtils.getStackTrace(e));
+        }
+        return active;
+    }
+   
+    public void markActive( Connection wlmDB,  String schema,  String loadID) {
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = wlmDB.prepareStatement("update " + schema + ".TABLENAME set INDICATOR = 'Y' where LOAD_ID = " + loadID + ";");
+            pstmt.executeUpdate();
+            DailyResetDAOImpl.logger.debug("Load id: " + loadID + " is  NOT Active.");
+            DailyResetDAOImpl.logger.debug("Load ID: " + loadID + " marked as Active");
+            pstmt.close();
+        }
+        catch (Exception e) {
+            DailyResetDAOImpl.logger.error(ExceptionUtils.getStackTrace(e));
+        }
+    }
+   
+    public void runReset( Connection wlmDB,  String schema,  String loadID) {
+        PreparedStatement pstmt = null;
+        PreparedStatement pstmt2 = null;
+        try {
+            pstmt = wlmDB.prepareStatement("update " + schema + ".TABLENAME " + "set CODE = 'N' " + ", DESCRIPTION = 'NO' " + "where LOAD_ID = " + loadID + " " + "and LOAD_CODE = 'ERROR' " + "and ( LOAD_DESC like 'Valid%' " + "or LOAD_DESC like 'Error: %' );");
+            int rowsUpdated = pstmt.executeUpdate();
+            DailyResetDAOImpl.logger.debug("Rows Updated 1: " + rowsUpdated);
+            pstmt.close();
+            pstmt2 = wlmDB.prepareStatement("update " + schema + " from " + schema + ".TABLENAME ");
+            int rowsUpdated2 = pstmt2.executeUpdate();
+            DailyResetDAOImpl.logger.debug("Rows Updated 2: " + rowsUpdated2);
+            pstmt2.close();
+        }
+        catch (Exception e) {
+            DailyResetDAOImpl.logger.error(ExceptionUtils.getStackTrace(e));
+        }
+    }
+}

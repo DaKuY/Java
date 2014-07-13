@@ -1,0 +1,14 @@
+package com.dfwcomputech.spring.domaindto;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Provider {
+	@Autowired
+	private Pfin pfin;
+	
+	public void sayPfin(){
+		System.out.println("My pfin is:"+pfin.getPfinStr());
+	}
+}

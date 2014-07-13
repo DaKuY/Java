@@ -1,0 +1,30 @@
+package com.andrewcamero.spring;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+/**
+ * Hello world! with Spring
+ *
+ */
+public class App 
+{
+	/*
+	 * Loads the Spring Beans
+	 */
+	static ApplicationContext context;
+	static{
+		 context = new ClassPathXmlApplicationContext("Spring-Beans.xml");
+	}
+	
+    public static void main( String... vars )
+    {
+       helloWorld();
+    }
+    
+	private static void helloWorld(){
+		
+		HelloWorld helloWorld=(HelloWorld)context.getBean("helloWorld");
+		helloWorld.sayHello();	
+	}
+}

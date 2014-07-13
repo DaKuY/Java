@@ -1,0 +1,40 @@
+package com.andrewcamero.spring;
+
+import java.util.List;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.andrewcamero.spring.dao.ProviderDao;
+import com.andrewcamero.spring.domaindto.Provider;
+
+public class App {
+	static ApplicationContext context;
+	static{
+		 context = new ClassPathXmlApplicationContext("Spring-Module.xml");
+	}
+	public static void main(String... vars) {
+		helloWorldExample();
+		//autoWiredExample();
+		//jdbcTemplateExample();
+	}
+
+	private static void helloWorldExample(){
+		
+		HelloWorld helloWorld=(HelloWorld)context.getBean("helloWorld");
+		helloWorld.sayHello();	
+	}
+	
+	private static void autoWiredExample(){
+		Provider provider=(Provider) context.getBean("provider");
+		provider.sayPfin();
+	}
+	
+	private static void jdbcTemplateExample(){
+		ProviderDao dao = (ProviderDao)context.getBean("providerDaoImpl");
+		List<String> results = dao.queryTest();
+		for(String row:results){
+			System.out.println(row);
+		}
+	}
+}

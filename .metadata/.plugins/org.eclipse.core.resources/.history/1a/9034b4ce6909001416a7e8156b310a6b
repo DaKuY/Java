@@ -1,0 +1,36 @@
+package com.andrewcamero.example;
+
+
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import java.sql.Connection;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class DBConnectionDAOImpl
+{
+    private static Logger logger;
+
+    static {
+        DBConnectionDAOImpl.logger = LogManager.getLogger(DBConnectionDAOImpl.class);
+    }
+    
+    public void runSQL( Connection wlmDB,  String schema,  String loadID) {
+        PreparedStatement pstmt = null;
+        PreparedStatement pstmt2 = null;
+        try {
+            pstmt = wlmDB.prepareStatement("update " + schema + ".TABLENAME ");
+            int rowsUpdated = pstmt.executeUpdate();
+            DBConnectionDAOImpl.logger.debug("Rows Updated 1: " + rowsUpdated);
+            pstmt.close();
+            pstmt2 = wlmDB.prepareStatement("update " + schema + " from " + schema + ".TABLENAME ");
+            int rowsUpdated2 = pstmt2.executeUpdate();
+            DBConnectionDAOImpl.logger.debug("Rows Updated 2: " + rowsUpdated2);
+            pstmt2.close();
+        }
+        catch (Exception e) {
+            DBConnectionDAOImpl.logger.error(ExceptionUtils.getStackTrace(e));
+        }
+    }
+}

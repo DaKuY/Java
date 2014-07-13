@@ -1,0 +1,5 @@
+package com.andrewcamero.spring.dao.impl;
+
+public class ProviderDaoImpl {
+
+}

@@ -1,0 +1,29 @@
+package com.dfwcomputech.spring.dao.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.stereotype.Component;
+
+import com.andrewcamero.spring.dao.ProviderDao;
+import com.dfwcomputech.spring.dao.impl.extractor.TestQueryExtractor;
+
+@Component
+public class ProviderDaoImpl extends JdbcDaoSupport implements ProviderDao{
+
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+	
+	//@Autowired	
+	private Map sqlMap;
+	
+	@Override
+	public List<String> queryTest() {
+		String queryStr=(String)sqlMap.get("query_test");
+		return jdbcTemplate.query(queryStr, new TestQueryExtractor());
+	}
+
+}

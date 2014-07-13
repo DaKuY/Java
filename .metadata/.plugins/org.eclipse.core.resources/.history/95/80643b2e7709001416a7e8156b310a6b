@@ -1,0 +1,62 @@
+package com.andrewcamero.jdbc;
+
+import java.sql.Connection;
+import java.net.URL;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.logging.log4j.LogManager;
+import java.util.Properties;
+import org.apache.logging.log4j.Logger;
+
+/*
+ * This is the main class. 
+ * Retrieves the properties, establishes a connection to the DB, Executes SQL
+ */
+public class DBConnection
+{
+    private static Logger logger = LogManager.getLogger(DBConnection.class);
+    private static Properties properties;
+    private static String schema;
+    private static String username;
+    private static String password;
+    private static String url;
+  
+    private static void loadProperties() {
+        String propertiesFile = "db.properties";
+        try {
+        	properties = new Properties();
+            URL uniformResourceLocator = ClassLoader.getSystemResource(propertiesFile);
+            properties.load(uniformResourceLocator.openStream());
+        }
+        catch (Exception e) {
+            DBConnection.logger.error(ExceptionUtils.getStackTrace(e));
+            System.exit(1);
+        }        
+    }
+    
+    private static void init() {
+        username = properties.getProperty("username");
+        password = properties.getProperty("password");
+        url = properties.getProperty("url");
+        schema = properties.getProperty("schema");
+    }
+   
+    public static void runSQL() {
+        Connection connection = ConnectionManager.getDBConnection(DBConnection.url, DBConnection.username, DBConnection.password);
+        DBConnectionDAOImpl impl = new DBConnectionDAOImpl();
+        
+        impl.executeSQL(connection, schema);
+        
+        ConnectionManager.closeConnection(connection);
+    }
+   
+    public static void main(String[] aa) {
+        long startTime = System.nanoTime();
+        
+        loadProperties();
+        init();
+        runSQL();
+        
+        long endTime = System.nanoTime();
+        DBConnection.logger.debug("Took " + (endTime - startTime) / 1000000000L + "s");
+    }
+}
