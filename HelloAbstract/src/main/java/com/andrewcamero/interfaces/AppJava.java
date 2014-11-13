@@ -11,6 +11,9 @@ public class AppJava {
 
 	public static void main(String[] args) {
 		
+		int test = Integer.parseInt("/");
+		System.out.println(test);
+		
 		AnimalService animalService = new AnimalServiceImpl();
 		
 		List<Animal> animalList = animalService.getAllAnimals();
