@@ -1,0 +1,5 @@
+package com.hibernateclass.simpleab.dao;
+
+public interface PersonDao {
+
+}

@@ -1,0 +1,11 @@
+package com.hibernateclass.simpleab.dao;
+
+import com.hibernateclass.simpleab.model.Person;
+
+public interface PersonDao {
+	
+	public void persist (Person person);
+	public Person get(String firstName, String lastName);
+	public void update(Person person);
+
+}

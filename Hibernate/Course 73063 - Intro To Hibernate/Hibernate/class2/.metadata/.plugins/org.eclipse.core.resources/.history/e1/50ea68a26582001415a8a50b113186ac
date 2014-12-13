@@ -1,0 +1,7 @@
+package com.hibernateclass.simpleab.dao;
+
+public interface AddressDao {
+	
+	public String getAddress();
+
+}

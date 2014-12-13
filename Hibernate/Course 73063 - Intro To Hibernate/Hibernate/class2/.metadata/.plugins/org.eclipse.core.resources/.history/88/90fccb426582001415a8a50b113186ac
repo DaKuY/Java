@@ -1,0 +1,15 @@
+package com.hibernateclass.simpleab.model;
+
+import java.util.Date;
+
+public class Person {
+	
+	private String firstName;
+	private String lastName;
+	private String age;
+	private String gender; 
+	private Date dob;
+	private String email;
+	
+
+}

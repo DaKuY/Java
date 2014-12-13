@@ -1,0 +1,11 @@
+package com.hibernateclass.simpleab;
+
+public interface AddressDao {
+	
+	public String persist(Address a);
+	public String get();
+	public void update();
+	public void delete();
+	public void list();
+
+}

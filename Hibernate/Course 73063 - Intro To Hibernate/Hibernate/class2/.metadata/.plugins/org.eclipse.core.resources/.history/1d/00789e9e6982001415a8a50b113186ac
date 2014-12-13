@@ -1,0 +1,16 @@
+package com.hibernateclass.simpleab.dao;
+
+import java.util.List;
+
+import com.hibernateclass.simpleab.model.Address;
+import com.hibernateclass.simpleab.model.Person;
+
+public interface AddressDao {
+	
+	public String persist(Address address);
+	public String get(String personId);
+	public void update(Address address);
+	public void delete(Address address);
+	public List<Address> list();
+
+}

@@ -1,0 +1,13 @@
+package com.hibernateclass.simpleab.dao;
+
+import com.hibernateclass.simpleab.model.Address;
+
+public interface AddressDao {
+	
+	public String persist(Address address);
+	public String get(String personId);
+	public void update(Address address);
+	public void delete(Address address);
+	public void list();
+
+}
