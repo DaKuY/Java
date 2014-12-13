@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;AppMain.java&apos; to &apos;SimpleAddressBook/src/com.hibernateclass.simpleab&apos;&#x0D;&#x0A;- Original project: &apos;SimpleAddressBookAndrew&apos;&#x0D;&#x0A;- Destination element: &apos;SimpleAddressBook/src/com.hibernateclass.simpleab&apos;&#x0D;&#x0A;- Original element: &apos;com.hibernateclass.simpleab.AppMain.java&apos;" description="Copy compilation unit" destination="=SimpleAddressBook/src&lt;com.hibernateclass.simpleab" element1="/src&lt;com.hibernateclass.simpleab{AppMain.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1418443475306" units="1" version="1.0"/>
+</session>

@@ -1,0 +1,108 @@
+package com.hibernateclass.simpleab;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
+import com.hibernateclass.simpleab.model.Address;
+import com.hibernateclass.simpleab.model.Person;
+import com.hibernateclass.simpleab.service.AddressService;
+import com.hibernateclass.simpleab.service.AddressServiceImpl;
+import com.hibernateclass.simpleab.service.PersonService;
+import com.hibernateclass.simpleab.service.PersonServiceImpl;
+
+public class AppMain {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Person person = new Person();
+		Address address = new Address();
+		PersonService personService = new PersonServiceImpl();
+		AddressService addressService = new AddressServiceImpl();
+		 	
+		
+		person.setFirstName("Tom");
+		person.setLastName("Smith");
+		person.setGender("M");
+		person.setEmail("any@email.com");
+		
+		String dateInString = "01-15-1975 00:00:00";
+		
+		try {
+			person.setDob(sdf.parse(dateInString));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		address.setStreet("123 Street");
+		address.setCity("Plano");
+		address.setState("TX");
+		address.setZipCode("75023");
+		
+		// Call ServiceLayer
+		//personService.save(person);
+		//addressService.save(address);
+			
+		
+		person.setFirstName("Judy");
+		person.setLastName("Jones");
+		person.setGender("F");
+		person.setEmail("another@email.com");
+		
+		dateInString = "03-25-1968 00:00:00";
+		
+		try {
+			person.setDob(sdf.parse(dateInString));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		address.setStreet("456 Avenue");
+		address.setCity("Frisco");
+		address.setState("TX");
+		address.setZipCode("75034");
+		
+		// Call ServiceLayer
+		//personService.save(person);
+		//addressService.save(address);
+		
+		List<Person> people = personService.list();
+		System.out.println(Arrays.toString(people.toArray()));
+		List<Address> locations = addressService.list();
+		System.out.println(Arrays.toString(locations.toArray()));
+				
+		}
+	
+	public Person createPerson(Person person, String firstName, String lastName, String gender, String email, String date){
+		SimpleDateFormat sdf = new SimpleDateFormat("M-dd-yyyy hh:mm:ss");
+		
+		person.setFirstName("Tom");
+		person.setLastName("Smith");
+		person.setGender("M");
+		person.setEmail("any@email.com");
+		
+		try {
+			person.setDob(sdf.parse(date));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return person;
+		
+	}
+	
+	public Address createAddress(Address address){
+		
+		return address;
+	}
+	
+	}

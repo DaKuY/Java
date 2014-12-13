@@ -6,10 +6,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.hibernateclass.simpleab.dao.PersonDao;
+import com.hibernateclass.simpleab.dao.PersonDaoJdbcImpl;
 import com.hibernateclass.simpleab.model.Address;
 import com.hibernateclass.simpleab.model.Person;
 
 public class PersonServiceImpl implements PersonService {
+	PersonDao personDao = new PersonDaoJdbcImpl();
 
 	public PersonServiceImpl() {
 		// TODO Auto-generated constructor stub
@@ -17,15 +20,16 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	public void save(Person person) {
-		// TODO Auto-generated method stub
+		personDao.persist(person);
 		System.out.println(person);
 
 	}
 
 	@Override
 	public Person get(Person person) {
-		// TODO Auto-generated method stub
-		return null;
+		Person returnPerson = personDao.get(person.getFirstName(), person.getLastName());
+				
+		return returnPerson;
 	}
 
 	@Override
