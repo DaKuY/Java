@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+          "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    
+    <class name="com.hibernateclass.simpleab.model.Person" table="person">
+        
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        
+        <property name="firstName" />
+        
+        <property name="lastName" type="string">
+            <column name="Last_Name" />
+        </property>
+        
+        <property name="gender" type="string">
+            <column name="gender" />
+        </property>
+        
+        <property name="age" type="int">
+            <column name="age" />
+        </property>
+        
+        <property name="dob" type="java.util.Date">
+            <column name="Birthday" />
+        </property>
+        
+        <property name="email" />
+    
+    </class>
+    
+</hibernate-mapping>

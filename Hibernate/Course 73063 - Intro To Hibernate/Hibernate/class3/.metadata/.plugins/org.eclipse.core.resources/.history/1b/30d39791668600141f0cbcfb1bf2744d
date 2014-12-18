@@ -1,0 +1,62 @@
+package com.hibernateclass.simpleab;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import com.hibernateclass.simpleab.model.Person;
+import com.hibernateclass.simpleab.util.StrToDate;
+
+public class AppMainHbmStart {
+
+	public static void main(String[] args) {
+				
+		System.out.println("Start Hibernate");
+		SessionFactory sf = new Configuration().configure().buildSessionFactory();		
+		Session session = sf.openSession();
+		
+		// Session 1
+		System.out.println("start session 1");
+		session.beginTransaction();
+
+		// Creating a new person named Tom
+		AppMainHbmStart app = new AppMainHbmStart();
+		Person person = app.createPerson();
+		person.setFirstName("Tom");
+		person.setLastName("Smith");	
+		person.setAge(25);
+		person.setGender("M");
+		person.setEmail("any@email.com");
+		person.setDob(StrToDate.convert("01-15-1975"));
+		
+		session.persist(person);
+		
+		session.getTransaction().commit();
+		session.close();
+		
+
+		//Session 2
+		System.out.println("start session 2");
+		Session session2 = sf.openSession();
+		session2.beginTransaction();
+
+		// code here
+		
+		session2.getTransaction().commit();
+		session2.close();
+		System.out.println("End Hibernate");
+	}
+	
+	public Person createPerson(String fristName, String lastName, int age, Strin gender, String email, String dob){
+		Person person = new Person();
+		person.setFirstName(firstName);
+		person.setLastName(lsatName);	
+		person.setAge(25);
+		person.setGender("M");
+		person.setEmail("any@email.com");
+		person.setDob(StrToDate.convert("01-15-1975"));
+		
+		return person;
+	}
+
+}

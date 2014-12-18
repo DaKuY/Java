@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+          "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.hibernateclass.simpleab.model.Person" table="person">
+        
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+			<generator class="identity" />
+        </id>
+        
+        <property name="firstName" type="sting">
+        	<column name="first_name_hb"/>
+        </property>
+        
+        <property name="lastName" type="sting">
+        	<column name="last_name_hb"/>
+        </property>
+        
+        <property name="gender"/>
+        
+        <property name="age" type="int">
+        </property>
+        
+        <property name="dob" type="date">
+        	<column name="birthday"/>
+        </property>
+        
+        <property name="email"/>        
+            
+    </class>
+
+</hibernate-mapping>

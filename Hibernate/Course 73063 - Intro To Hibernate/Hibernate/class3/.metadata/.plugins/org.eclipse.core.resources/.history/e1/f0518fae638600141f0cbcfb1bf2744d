@@ -1,0 +1,29 @@
+package com.hibernateclass.simpleab;
+
+import com.hibernateclass.simpleab.model.Address;
+import com.hibernateclass.simpleab.model.Person;
+import com.hibernateclass.simpleab.service.AddressService;
+import com.hibernateclass.simpleab.service.AddressServiceImpl;
+import com.hibernateclass.simpleab.service.PersonService;
+import com.hibernateclass.simpleab.service.PersonServiceImpl;
+import com.hibernateclass.simpleab.util.StrToDate;
+import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactoy;
+
+public class AppMainHmbStart {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		System.out.println("Start Hibernate");
+		SessionFactory st = new Configuration().configure().buildSessionsFactory();
+
+	}
+	
+		
+	
+}
