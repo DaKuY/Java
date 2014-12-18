@@ -1,1 +1,2 @@
 INDEX VERSION 1.126+C:\Projects\Java\Hibernate\Course 73063 - Intro To Hibernate\Hibernate\class3\.metadata\.plugins\org.eclipse.jdt.core
+2222773679.index
