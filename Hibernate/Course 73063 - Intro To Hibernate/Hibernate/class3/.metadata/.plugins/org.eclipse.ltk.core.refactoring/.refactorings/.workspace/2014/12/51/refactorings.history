@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Copy of SimpleAddressBookJdbcV1a&apos; to &apos;SimpleAddressBookJdbcV1a&apos;" description="Rename resource &apos;Copy of SimpleAddressBookJdbcV1a&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/Copy of SimpleAddressBookJdbcV1a" name="SimpleAddressBookJdbcV1a" stamp="1418865041185" updateReferences="true"/>
+</session>
