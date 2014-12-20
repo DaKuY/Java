@@ -1,0 +1,15 @@
+package com.hibernateclass.simpleab.service;
+
+import java.util.Date;
+import java.util.List;
+import com.hibernateclass.simpleab.model.Person;
+
+public interface PersonService {
+	
+	public int save(Person person);
+	public Person get(Person person);
+	public List<Person> list();
+	public void remove(Person person);
+	public int calculateAgeToday(Date date);
+	
+}

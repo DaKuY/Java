@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.hibernateclass.Student" table="STUDENT">
+        <meta attribute="class-description">This class contains student details.</meta>
+        <id name="studentId" type="long" column="STUDENT_ID">
+            <generator class="native" />
+        </id>
+        <property name="studentName" type="string" not-null="true" length="100" column="STUDENT_NAME" />
+        <set name="studentPhoneNumbers" table="STUDENT_PHONE" cascade="all">
+			<key column="STUDENT_ID" />
+			<many-to-many column="PHONE_ID" unique="true" class="com.hibernateclass.Phone" />
+		</set>
+    </class>
+</hibernate-mapping>

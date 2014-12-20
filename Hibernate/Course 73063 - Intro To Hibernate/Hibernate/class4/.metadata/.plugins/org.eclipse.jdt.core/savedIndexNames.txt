@@ -1,0 +1,19 @@
+INDEX VERSION 1.126+C:\Projects\Java\Hibernate\Course 73063 - Intro To Hibernate\Hibernate\class4\.metadata\.plugins\org.eclipse.jdt.core
+1050491995.index
+366335718.index
+992486757.index
+24686230.index
+1076642022.index
+3623786862.index
+3499318647.index
+473297168.index
+1965768228.index
+2602917640.index
+36441778.index
+2811522529.index
+3958730807.index
+599621876.index
+2300501745.index
+1234832589.index
+925593712.index
+3437798466.index
