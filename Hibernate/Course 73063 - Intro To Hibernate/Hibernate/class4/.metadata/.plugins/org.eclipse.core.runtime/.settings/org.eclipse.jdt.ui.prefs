@@ -1,4 +1,4 @@
-#Fri Dec 19 21:02:04 CST 2014
+#Fri Dec 19 21:39:13 CST 2014
 content_assist_proposals_foreground=0,0,0
 spelling_ignore_urls=true
 spelling_locale_initialized=true
@@ -20,6 +20,7 @@ spelling_ignore_mixed=true
 spelling_ignore_java_strings=true
 content_assist_proposals_background=255,255,255
 org.eclipse.jdt.ui.formatterprofiles.version=12
+org.eclipse.jdt.internal.ui.navigator.layout=2
 content_assist_number_of_computers=21
 spelling_ignore_digits=true
 spelling_ignore_upper=true
