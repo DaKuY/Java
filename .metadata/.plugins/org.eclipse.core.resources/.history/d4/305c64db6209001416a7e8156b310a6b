@@ -49,7 +49,7 @@ public class ConnectionManager
 		
 		try{
 			Class.forName("com.ibm.db2.jcc.DB2Driver");
-			conn = DriverManager.getConnection("jdbc:db2://hcscksys.hcscint.net:446/DC01","wlmksys1","wlmksys1");
+			conn = DriverManager.getConnection("jdbc:db2://url:[port]/[db_name]","[username]","[password]");
 			System.out.println("Connected WLM Test database");
 			
 		}catch(Exception e){
